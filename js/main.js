@@ -25,7 +25,7 @@ reset();
 setTimeout(ShootBullets, 0);
 
 function ShootBullets() {
-  setTimeout(ShootBullets, 300);
+  setTimeout(ShootBullets, 1000);
   bulletArray.push(new Bullet());
 }
 

@@ -19,7 +19,9 @@ function runGame() {
   bullets();
   checkCollisions();
   currenttime += 1;
-
+  if (currenttime > besttime) {
+    besttime = currenttime;
+  }
   //Draw
   drawGame();
 }
