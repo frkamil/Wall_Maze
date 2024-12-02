@@ -132,6 +132,7 @@ function reset() {
     color: "rgb(73, 73, 155)",
     direct: 3,
   };
+
   //Wall Array
   wallArray = [];
   wallArray.push(new Wall(0, 50, 800, 10));

@@ -34,9 +34,11 @@ function moveWalls() {
   } else if (movingWall1.y <= 340) {
     movingWall1.direct = 2;
   }
+
   if (rectCollide(movingWall1, player1)) {
     gameOver();
   }
+
   //Wall 2
   movingWall2.y += movingWall2.direct;
   if (movingWall2.y >= cnv.height - movingWall2.h) {
@@ -44,7 +46,25 @@ function moveWalls() {
   } else if (movingWall2.y <= 340) {
     movingWall2.direct = 2;
   }
+
   if (rectCollide(movingWall2, player1)) {
-    gameOver;
+    gameOver();
   }
 }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
