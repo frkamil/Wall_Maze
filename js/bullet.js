@@ -13,15 +13,10 @@ class Bullet {
     } else {
       this.color = "rgb(73, 73, 155)";
     }
-
-    if (rectCollide(this, player1)) {
-      gameOver();
-    } else {
-      this.color = "rgb(73, 73, 155)";
-    }
   }
+
   shoot() {
-    this.x -= 2;
+    this.x -= 3;
     ctx.fillStyle = "rgb(73, 73, 155)";
     ctx.fillRect(this.x, this.y, this.w, this.h);
   }

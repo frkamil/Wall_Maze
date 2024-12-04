@@ -8,24 +8,22 @@ class Wall {
   }
 
   //   Method
+
+  //Draw Walls
   draw() {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.w, this.h);
   }
 
+  //Collide with player and bullets
   collide() {
     if (rectCollide(this, player1)) {
       gameOver();
     }
-
-    for (let i = 0; i < bulletArray.length; i++) {
-      if (rectCollide(this, bulletArray[i])) {
-        bulletArray.splice(bulletArray[i], 1);
-      }
-    }
   }
 }
 
+//For moving walls
 function moveWalls() {
   //Wall 1
   movingWall1.y += movingWall1.direct;
@@ -51,20 +49,3 @@ function moveWalls() {
     gameOver();
   }
 }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//

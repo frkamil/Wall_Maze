@@ -1,27 +1,8 @@
-// Draw Start Screen
-function drawStart() {
-  drawMainComponents();
-
-  // Start Text
-  ctx.font = "45px Georgia";
-  ctx.fillStyle = "rgb(73, 73, 155)";
-  ctx.fillText("CLICK TO START", 250, 285);
-
-  ctx.font = "25px Georgia";
-  ctx.fillText("USE ARROW KEYS TO MOVE", 260, 320);
-  ctx.fillText("REACH THE STAR TO WIN", 265, 350);
-}
-
 function runGame() {
   //Logic
   moveplayer1();
   moveWalls();
-  bullets();
   checkCollisions();
-  currenttime += 1;
-  if (currenttime > besttime) {
-    besttime = currenttime;
-  }
   //Draw
   drawGame();
 }
@@ -63,6 +44,13 @@ function checkCollisions() {
   ) {
     win();
   }
+
+  for (let n = 0; n < wallArray.length; n++)
+    for (let i = 0; i < bulletArray.length; i++) {
+      if (rectCollide(wallArray[n], bulletArray[i])) {
+        bulletArray.splice(0, 1);
+      }
+    }
 }
 
 function gameOver() {
@@ -72,11 +60,6 @@ function gameOver() {
 
 function win() {
   state = "win";
-  // Start Text
-  if (currenttime > besttime) {
-    besttime = currenttime;
-  }
-  currenttime = 0;
   setTimeout(reset, 2000);
 }
 
@@ -84,9 +67,8 @@ function win() {
 
 function drawGame() {
   drawMainComponents();
-
-  drawWalls();
   bullets();
+  drawWalls();
 }
 
 // Draw Game Over Screen
@@ -106,7 +88,7 @@ function drawGameWin() {
 
 //Helper Functions
 function reset() {
-  state = "start";
+  state = "gameon";
   player1 = {
     x: 130,
     y: 200,
@@ -116,7 +98,7 @@ function reset() {
   };
 
   movingWall1 = {
-    x: 420,
+    x: 440,
     y: 340,
     w: 20,
     h: 190,
@@ -152,20 +134,26 @@ function drawWalls() {
   ctx.fillStyle = movingWall2.color;
   ctx.fillRect(movingWall2.x, movingWall2.y, movingWall2.w, movingWall2.h);
   //Draw Walls
-  // Maze Walls
-  wallArray.push(new Wall(60, 100, 150, 20));
+  wallArray.push(new Wall(60, 100, 70, 20));
+  wallArray.push(new Wall(150, 100, 60, 20));
   wallArray.push(new Wall(60, 100, 20, 260));
   wallArray.push(new Wall(200, 100, 20, 260));
-  wallArray.push(new Wall(60, 400, 280, 20));
-  wallArray.push(new Wall(320, 100, 20, 450));
-  wallArray.push(new Wall(60, 480, 20, 120));
-  wallArray.push(new Wall(250, 480, 20, 120));
-  wallArray.push(new Wall(150, 420, 20, 120));
-  wallArray.push(new Wall(320, 100, 430, 20));
+  wallArray.push(new Wall(60, 400, 300, 20));
+  wallArray.push(new Wall(360, 100, 20, 450));
+  wallArray.push(new Wall(60, 400, 20, 80));
+  wallArray.push(new Wall(60, 520, 20, 80));
+  wallArray.push(new Wall(120, 420, 20, 120));
+  wallArray.push(new Wall(180, 480, 20, 120));
+  wallArray.push(new Wall(240, 420, 20, 120));
+  wallArray.push(new Wall(300, 480, 20, 120));
+  wallArray.push(new Wall(360, 100, 390, 20));
   wallArray.push(new Wall(735, 100, 20, 100));
-  wallArray.push(new Wall(390, 250, 455, 20));
-  wallArray.push(new Wall(390, 320, 455, 20));
-  wallArray.push(new Wall(340, 450, 400, 20));
+  wallArray.push(new Wall(420, 250, 455, 20));
+  wallArray.push(new Wall(420, 320, 455, 20));
+  wallArray.push(new Wall(380, 450, 340, 20));
+  wallArray.push(new Wall(220, 340, 70, 20));
+  wallArray.push(new Wall(220, 150, 70, 20));
+  wallArray.push(new Wall(290, 250, 70, 20));
 
   for (let i = 0; i < wallArray.length; i++) {
     wallArray[i].draw();
@@ -182,8 +170,7 @@ function drawMainComponents() {
   ctx.fillRect(0, 0, 800, 50);
   ctx.font = "30px Georgia";
   ctx.fillStyle = "grey";
-  ctx.fillText(`TIME = ${currenttime}`, 60, 35);
-  ctx.fillText(`BEST TIME = ${besttime}`, 300, 35);
+  ctx.fillText(`Wall Maze`, 330, 35);
   //   //Star
   ctx.drawImage(starImg, 500, 135, 100, 100);
 
